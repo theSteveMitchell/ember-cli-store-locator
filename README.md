@@ -4,14 +4,10 @@ This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
 
-* `git clone` this repository
+* `npm install ember-cli-store-locator`
 * `npm install`
-* `bower install`
-
-## Running
-
-* `ember server`
-* Visit your app at http://localhost:4200.
+* put this script in your index.html: `<script src="https://maps.googleapis.com/maps/api/js?client=gme-grouponinc2&libraries=places"></script>` (I know this is annoying, I plan to fix it!)
+* somewhere in your app, `{{store-map}}`
 
 ## Running Tests
 
