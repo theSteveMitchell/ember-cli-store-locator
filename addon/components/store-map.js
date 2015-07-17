@@ -10,14 +10,6 @@ export default Ember.Component.extend({
   layout: layout,
 
   //right now we have 3 async events, that are fired in serial.... 
-
-   loadPlugin: function() {
-    // Use run loop if you need to setup the DOM first
-    Ember.run.scheduleOnce('afterRender', this, function() {
-      Ember.$.getScript('https://maps.googleapis.com/maps/api/js?libraries=places');
-    });
-  }.on('init')
-
   didInsertElement: function() {
     this.createMap();
     this.getLocationAndCenterMap();
@@ -51,9 +43,6 @@ export default Ember.Component.extend({
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         this.map.setCenter({lat: position.coords.latitude, lng: position.coords.longitude});
-
-        this.set("params.lat", lat);
-        this.set("params.lng", lng);
       }.bind(this));
     }
   },
