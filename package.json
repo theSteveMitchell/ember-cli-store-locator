@@ -37,10 +37,8 @@
     "ember-addon"
   ],
   "dependencies": {
-    "ember-browserify": "^1.0.1",
     "ember-cli-babel": "^5.0.0",
-    "ember-cli-htmlbars": "^0.7.9",
-    "google-maps-api": "^1.0.2"
+    "ember-cli-htmlbars": "^0.7.9"
   },
   "ember-addon": {
     "configPath": "tests/dummy/config"

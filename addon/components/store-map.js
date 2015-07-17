@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import layout from '../templates/components/store-map';
-import googleMapsApi from 'npm:google-maps-api';
 
 /**
   To use this component in your app, add this to the template:
@@ -10,11 +9,18 @@ import googleMapsApi from 'npm:google-maps-api';
 export default Ember.Component.extend({
   layout: layout,
 
-  didInsertElement: function() {
-    googleMapsApi().then( function( maps ) {
-      this.createMap();
-      this.getLocationAndCenterMap();
+  //right now we have 3 async events, that are fired in serial.... 
+
+   loadPlugin: function() {
+    // Use run loop if you need to setup the DOM first
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      Ember.$.getScript('https://maps.googleapis.com/maps/api/js?libraries=places');
     });
+  }.on('init')
+
+  didInsertElement: function() {
+    this.createMap();
+    this.getLocationAndCenterMap();
   },
 
   createMap: function() {
