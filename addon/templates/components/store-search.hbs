@@ -1,0 +1,9 @@
+ {{input type="text" class="location-search" value=focus_location placeholder="Enter a location" action="submitAutoComplete"}}
+
+ <div class="pac-container">
+    {{#each result in queryPredictions}}
+      <div {{bind-attr class=":pac-item result.isHighlighted:active"}} {{action 'selectPlacePrediction' result}}>
+        {{result.description}}
+      </div>
+    {{/each}}
+  </div>

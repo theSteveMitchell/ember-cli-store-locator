@@ -1,0 +1,16 @@
+.store-search-panel {
+  width: 320px;
+  margin-right: 10px;
+  position: absolute;
+  top: 15px;
+  left: 30px;
+  z-index: 100;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  overflow: auto;
+}
+
+body{
+  margin: 0px;
+}
