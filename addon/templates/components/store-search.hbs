@@ -1,8 +1,8 @@
- {{input type="text" class="location-search" value=focus_location placeholder="Enter a location" action="submitAutoComplete"}}
+ {{focus-input type="text" class="location-search" value=focus_location placeholder="Enter a location" action="submitSearch"}}
 
  <div class="pac-container">
     {{#each result in queryPredictions}}
-      <div {{bind-attr class=":pac-item result.isHighlighted:active"}} {{action 'selectPlacePrediction' result}}>
+      <div {{bind-attr class=":pac-item result.isHighlighted:active"}} {{action 'PickSuggestion' result}}>
         {{result.description}}
       </div>
     {{/each}}

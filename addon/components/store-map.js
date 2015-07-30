@@ -38,6 +38,10 @@ export default Ember.Component.extend({
     );
   },
 
+  didPickAutocompleteSuggestion: function(e, place_ic){
+    debugger;
+  },
+
   getLocationAndCenterMap: function() {
     //we should start the geolocation call at the same time we start loading the map.
     if(navigator.geolocation) {

@@ -1,9 +1,15 @@
 import Ember from 'ember';
 import layout from '../templates/components/store-search';
-var _ = require('lodash');
+import StoreMap from './store-map';
 
 export default Ember.Component.extend({
   layout: layout,
+  queryPredictions: [],
+
+  didInsertElement: function() {
+    this.element.focus();
+    debugger;
+  },
 
   keyUp: function(e) {
     var arrowUp = 38;
@@ -29,7 +35,7 @@ export default Ember.Component.extend({
       function(predictions, status) {
         Ember.run(function() {
           if (status === google.maps.places.PlacesServiceStatus.OK) {
-            var emberWrappedPredictions = _.map(predictions, function(prediction) {
+            var emberWrappedPredictions = predictions.map(function(prediction){
               return Ember.Object.create(prediction);
             });
 
@@ -41,5 +47,45 @@ export default Ember.Component.extend({
         }.bind(this));
       }.bind(this));
     }.bind(this));
+  },
+
+  moveAutocompleteHighlight: function(direction) {
+    var currentIndex = this.get("autocompleteIndex") || 0;
+    var queryPredictions = this.get("queryPredictions");
+
+    var newIndex;
+    if(direction === "up") {
+      newIndex = Math.max(0, currentIndex - 1);
+    } else {
+      newIndex = Math.min(this.get("queryPredictions").length - 1, currentIndex + 1);
+    }
+
+    queryPredictions[currentIndex].set("isHighlighted", false);
+    queryPredictions[newIndex].set("isHighlighted", true);
+
+    this.set("autocompleteIndex", newIndex);
+  }, 
+
+  actions: {
+    // submitSearch handles enter key in the search box.
+    // If no autocomplete suggestion is highlighted, we select the first.
+    submitSearch: function(e, c) {
+      var predictions = this.get("queryPredictions");
+      var autocompleteIndex = this.get("autocompleteIndex");
+      //this.send("selectPlacePrediction", predictions[autocompleteIndex]);
+      //place_id = predictions[autocompleteIndex].get("place_id");
+      debugger;
+      Ember.$(evt.target).trigger(didPickAutocompleteSuggestion, place_id);
+    },
+
+    // pickSuggestion handles mouse click on an autocomplete suggestion
+    PickSuggestion: function(google_place) {
+      debugger;
+    }
+
+
   }
+
+  //
+
 });
